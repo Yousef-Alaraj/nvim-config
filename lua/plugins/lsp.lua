@@ -9,15 +9,14 @@ return {
 			"L3MON4D3/LuaSnip",
 		},
 		config = function()
-			-- --- DIAGNOSTICS CONFIG ---
 			vim.diagnostic.config({
-				virtual_text = true, -- This is the magic toggle for the inline text
-				signs = true, -- Shows the E/W/H/I icons in the left gutter
-				underline = true, -- Squiggly lines under the actual error
-				update_in_insert = false, -- Wait until you exit Insert mode to show errors
-				severity_sort = true, -- Show the most critical errors first
+				virtual_text = true,
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
 			})
-			-- --------------------------
+
 			local cmp = require("cmp")
 			cmp.setup({
 				snippet = {
@@ -37,30 +36,29 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason").setup()
 
-			-- --- THE C++ FIX ---
-			-- Force clangd to use GCC and strictly define the root folder
-			vim.lsp.config("clangd", {
-				capabilities = capabilities,
-				cmd = {
-					"clangd",
-					"--query-driver=/usr/local/bin/g++-15",
-					"--background-index",
-					"--clang-tidy",
-					"--header-insertion=never",
-				},
-				-- This tells clangd: "If you see compile_flags.txt, this is the root project."
-				root_markers = { "compile_flags.txt", ".git" },
-			})
-			-- -------------------
-
+			-- Let Mason handle the setup of the servers
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls", "clangd" },
 				handlers = {
+					-- 1. Default handler for all servers
 					function(server_name)
-						if server_name ~= "clangd" then
-							vim.lsp.config(server_name, { capabilities = capabilities })
-						end
-						vim.lsp.enable(server_name)
+						require("lspconfig")[server_name].setup({
+							capabilities = capabilities,
+						})
+					end,
+
+					-- 2. Dedicated handler for clangd to force GCC 15 headers
+					["clangd"] = function()
+						require("lspconfig").clangd.setup({
+							capabilities = capabilities,
+							cmd = {
+								"clangd",
+								"--query-driver=/usr/local/bin/g++-15",
+								"--background-index",
+								"--clang-tidy",
+								"--header-insertion=never",
+							},
+						})
 					end,
 				},
 			})

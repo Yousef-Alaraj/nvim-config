@@ -5,17 +5,15 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			-- Conform will run multiple formatters sequentially
 			python = { "isort", "black" },
-			-- You can customize some of the format options for the filetype
 			rust = { "rustfmt", lsp_format = "fallback" },
-			-- Conform will run the first available formatter
 			javascript = { "prettier" },
 			html = { "prettier" },
 			css = { "prettier" },
-			-- ADD MARKDOWN HERE
 			markdown = { "prettier" },
 			json = { "prettier" },
+			-- Add this line:
+			cpp = { "clang-format" },
 		},
 		formatters = {
 			prettier = {
