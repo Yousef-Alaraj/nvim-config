@@ -6,7 +6,11 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/LuaSnip",
+			"rafamadriz/friendly-snippets",
 		},
 		config = function()
 			vim.diagnostic.config({
@@ -16,6 +20,9 @@ return {
 				update_in_insert = false,
 				severity_sort = true,
 			})
+
+			-- Load the snippet library
+			require("luasnip.loaders.from_vscode").lazy_load()
 
 			local cmp = require("cmp")
 			cmp.setup({
@@ -30,6 +37,9 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 
