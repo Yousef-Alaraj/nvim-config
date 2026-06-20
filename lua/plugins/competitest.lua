@@ -39,7 +39,7 @@ return {
 				cpp = {
 					exec = "/usr/local/bin/g++-15",
 					-- CHANGED: Updated to c++23 and added -Wall for better diagnostics
-					args = { "-O2", "-std=c++23", "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" },
+					args = { "-O2", "-std=c++23", "$(FNAME)", "-o", "$(FNOEXT)" },
 				},
 			},
 			run_command = {

@@ -55,7 +55,7 @@ return {
 								"clangd",
 								"--query-driver=/usr/local/bin/g++-15",
 								"--background-index",
-								"--clang-tidy",
+								-- "--clang-tidy",
 								"--header-insertion=never",
 							},
 						})
