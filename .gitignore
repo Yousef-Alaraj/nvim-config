@@ -1,0 +1,10 @@
+# OS generated files
+.DS_Store
+
+# Neovim specific ignores
+*.swp
+*.swo
+*.shada
+.netrwhist
+undo/
+sessions/
