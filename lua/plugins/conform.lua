@@ -12,8 +12,6 @@ return {
 			css = { "prettier" },
 			markdown = { "prettier" },
 			json = { "prettier" },
-			-- Add this line:
-			cpp = { "clang-format" },
 		},
 		formatters = {
 			prettier = {

@@ -23,6 +23,9 @@ return {
 
 			-- Load the snippet library
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load({
+				paths = { vim.fn.stdpath("config") .. "/snippets" },
+			})
 
 			local cmp = require("cmp")
 			cmp.setup({
