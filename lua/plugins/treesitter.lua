@@ -2,28 +2,37 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	config = function()
-		-- The new API uses the top-level module
-		require("nvim-treesitter").setup()
+		-- Using the correct top-level API
+		require("nvim-treesitter").setup({
 
-		-- The new way to ensure parsers are installed
-		require("nvim-treesitter").install({
-			"c",
-			"cpp",
-			"python",
-			"lua",
-			"javascript",
-			"html",
-			"css",
-			"markdown",
-			"markdown_inline",
-		})
+			-- Declaratively define your parsers
+			ensure_installed = {
+				"c",
+				"cpp",
+				"python",
+				"lua",
+				"javascript",
+				"html",
+				"css",
+				"markdown",
+				"markdown_inline",
+			},
 
-		-- Your original (and correct) autocmd implementation
-		vim.api.nvim_create_autocmd("FileType", {
-			callback = function()
-				pcall(vim.treesitter.start)
-				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-			end,
+			-- Install parsers synchronously (only applied to `ensure_installed`)
+			sync_install = false,
+
+			-- Automatically install missing parsers when entering a buffer
+			auto_install = true,
+
+			-- Treesitter-based indentation
+			indent = {
+				enable = true,
+			},
+
+			-- AST-based syntax highlighting
+			highlight = {
+				enable = true,
+			},
 		})
 	end,
 }
