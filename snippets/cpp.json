@@ -176,5 +176,40 @@
       "};$0"
     ],
     "description": "Inserts a Segment Tree with Lazy Propagation template"
+  },
+  "Disjoint Set Union (DSU)": {
+    "prefix": "dsu",
+    "body": [
+      "struct DSU {",
+      "    vector<int> p;",
+      "    vector<int> sz;",
+      "    int n;",
+      "",
+      "    DSU(int n) {",
+      "        this->n = n;",
+      "        p.assign(n, 0);",
+      "        iota(p.begin(), p.end(), 0);",
+      "        sz.assign(n, 1);",
+      "    }",
+      "",
+      "    int find(int a) { return (a == p[a] ? a : p[a] = find(p[a])); }",
+      "",
+      "    bool unite(int a, int b) {",
+      "        a = find(a);",
+      "        b = find(b);",
+      "",
+      "        if (a == b)",
+      "            return false;",
+      "",
+      "        if (sz[b] > sz[a])",
+      "            swap(b, a);",
+      "",
+      "        p[b] = a;",
+      "        sz[a] += sz[b];",
+      "        return true;",
+      "    }",
+      "};"
+    ],
+    "description": "Disjoint Set Union (DSU) structure with path compression and union by size"
   }
 }
