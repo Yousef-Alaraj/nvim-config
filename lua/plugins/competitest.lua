@@ -16,24 +16,19 @@ return {
 	config = function()
 		require("competitest").setup({
 			start_receiving_persistently_on_setup = true,
-
 			received_files_extension = "cpp",
 
-			-- Replaces spaces in the problem name with underscores
-			received_problems_path = function(task, file_ext)
-				local safe_name = string.gsub(task.name, " ", "_")
-				return safe_name .. "." .. file_ext
-			end,
+			-- FIX: Replaced the Lua functions with the native $(JAVA_TASK_CLASS) modifier
+			-- to automatically strip spaces and punctuation.
+			received_problems_path = "$(JAVA_TASK_CLASS).$(FEXT)",
 
 			received_contests_directory = ".",
+			received_contests_problems_path = "$(JAVA_TASK_CLASS).$(FEXT)",
 
-			-- Applies the same space-to-underscore fix for full contests
-			received_contests_problems_path = function(task, file_ext)
-				local safe_name = string.gsub(task.name, " ", "_")
-				return safe_name .. "." .. file_ext
-			end,
-
-			template_file = "~/Desktop/competitive-programming/template.cpp",
+			-- FIX: Mapped directly to 'cpp' and used $(HOME) instead of ~
+			template_file = {
+				cpp = vim.fn.expand("~/Desktop/competitive-programming/template.cpp"),
+			},
 
 			compile_command = {
 				cpp = {
@@ -42,11 +37,18 @@ return {
 					args = { "-O2", "-std=c++23", "$(FNAME)", "-o", "$(FNOEXT)" },
 				},
 			},
+
+			-- FIX: Wrapped in the 'cpp' key to match compile_command
 			run_command = {
-				exec = "./$(FNOEXT)",
+				cpp = {
+					exec = "./$(FNOEXT)",
+				},
 			},
+
 			testcases_use_single_file = true,
 			evaluate_template_modifiers = true,
+			multiple_testing = -1,
+			output_compare_method = "squish",
 		})
 	end,
 }
