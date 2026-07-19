@@ -11,6 +11,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
 			vim.diagnostic.config({
@@ -48,6 +49,15 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason").setup()
+
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					"stylua",
+					"isort",
+					"black",
+					"prettier",
+				},
+			})
 
 			-- Let Mason handle the setup of the servers
 			require("mason-lspconfig").setup({
