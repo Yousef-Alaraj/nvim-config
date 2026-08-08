@@ -5,7 +5,18 @@ return {
 	config = function()
 		-- 1. Install your desired parsers
 		-- You can replace these with the languages you actually use
-		require("nvim-treesitter").install({ "c", "javascript", "cpp", "lua", "html", "python", "css", "markdown" })
+		require("nvim-treesitter").install({
+			"c",
+			"javascript",
+			"cpp",
+			"lua",
+			"html",
+			"python",
+			"css",
+			"markdown",
+			"markdown_inline",
+			"latex",
+		})
 
 		-- 2. Enable Treesitter highlighting and folding via Neovim's native API
 		-- The repository states this is required because the plugin no longer does it for you
@@ -21,6 +32,8 @@ return {
 				"html",
 				"css",
 				"markdown",
+				"markdown_inline",
+				"latex",
 			},
 			callback = function()
 				-- Enable syntax highlighting
@@ -29,6 +42,10 @@ return {
 				-- Enable Treesitter-based folding
 				-- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
 				-- vim.wo[0][0].foldmethod = "expr"
+
+				if vim.bo.filetype == "markdown" or vim.bo.filetype == "latex" then
+					vim.opt_local.conceallevel = 2
+				end
 
 				-- Enable Treesitter-based indentation (considered experimental by the repo)
 				if vim.bo.filetype ~= "lua" then
