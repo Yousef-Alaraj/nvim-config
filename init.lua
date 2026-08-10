@@ -1,4 +1,6 @@
-require("void")
-require("config.lazy")
+require('options')
+require('keymaps')
 
-vim.opt.clipboard = "unnamedplus"
+require('plugins.aesthetics')
+require('plugins.coding')
+require('plugins.lsp')
