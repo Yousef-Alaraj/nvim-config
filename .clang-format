@@ -1,0 +1,16 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Keeps compact template logic and fast implementations readable
+AllowShortBlocksOnASingleLine: Always
+AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortFunctionsOnASingleLine: All
+
+# Prevents complex STL containers and bitmask operations from wrapping awkwardly
+ColumnLimit: 120
+
+# Aligns consecutive macro definitions nicely
+AlignConsecutiveMacros: true
