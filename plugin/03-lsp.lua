@@ -106,9 +106,11 @@ do
     local servers = {
         clangd = {
             cmd = {
-                vim.fn.stdpath("data") .. "/mason/bin/clangd",
+                "clangd",
                 "--query-driver=/usr/local/bin/g++-16",
+                -- You can add other useful clangd flags here, like:
                 "--background-index",
+                "--clang-tidy",
             },
         },
         -- gopls = {},
