@@ -104,7 +104,13 @@ do
     --  See `:help lsp-config` for information about keys and how to configure
     ---@type table<string, vim.lsp.Config>
     local servers = {
-        clangd = {},
+        clangd = {
+            cmd = {
+                vim.fn.stdpath("data") .. "/mason/bin/clangd",
+                "--query-driver=/usr/local/bin/g++-16",
+                "--background-index",
+            },
+        },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},

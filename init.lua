@@ -47,7 +47,3 @@ vim.api.nvim_create_autocmd("PackChanged", {
         end
     end,
 })
-
-require("plugins.lsp")
-require("plugins.coding")
-require("plugins.aesthetics")
