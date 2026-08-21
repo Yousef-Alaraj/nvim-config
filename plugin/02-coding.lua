@@ -144,13 +144,6 @@ do
     end, { desc = "[F]ormat buffer" })
 end
 
--- GUESS-INDENT
-
-do
-    vim.pack.add({ "https://github.com/NMAC427/guess-indent.nvim" })
-    require("guess-indent").setup({})
-end
-
 -- LUASNIP
 
 do
@@ -310,10 +303,7 @@ end
 
 do
     vim.pack.add({ "https://github.com/windwp/nvim-autopairs" })
-    require("nvim-autopairs").setup({
-        event = "InsertEnter",
-        config = true,
-    })
+    require("nvim-autopairs").setup({})
 end
 
 -- HARPOON
@@ -362,7 +352,7 @@ do
     vim.keymap.set(
         "n",
         "<leader>ti",
-        '<cmd>vsplit | term /usr/local/bin/g++-16 -O2 -std=c++23 "%" -o "%:r" && "./%:r"<CR>i',
+        '<cmd>vsplit | term /opt/homebrew/bin/g++-16 -O2 -std=c++20 "%" -o "%:r" && "./%:r"<CR>i',
         { desc = "Run Interactively" }
     )
 
@@ -383,13 +373,13 @@ do
         -- Evaluating vim.fn at load time can sometimes cause path resolution issues
         -- before the editor has fully initialized its working directories.
         template_file = {
-            cpp = "$(HOME)/Desktop/competitive-programming/template.cpp",
+            cpp = os.getenv("HOME") .. "/Desktop/competitive-programming/template.cpp",
         },
 
         compile_command = {
             cpp = {
-                exec = "/usr/local/bin/g++-16",
-                args = { "-O2", "-std=c++23", "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" },
+                exec = "/opt/homebrew/bin/g++-16",
+                args = { "-O2", "-std=c++20", "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" },
             },
         },
 

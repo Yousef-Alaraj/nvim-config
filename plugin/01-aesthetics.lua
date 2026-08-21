@@ -53,7 +53,7 @@ do
         },
     })
 
-    vim.cmd.colorscheme("catppuccin-nvim")
+    vim.cmd.colorscheme("catppuccin")
 end
 
 -- MINI

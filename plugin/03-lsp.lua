@@ -107,7 +107,6 @@ do
         clangd = {
             cmd = {
                 "clangd",
-                "--query-driver=/usr/local/bin/g++-16",
                 -- You can add other useful clangd flags here, like:
                 "--background-index",
                 "--clang-tidy",
@@ -194,7 +193,14 @@ do
 
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- Tell the LSP servers that our completion engine supports advanced features
+    capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
     for name, server in pairs(servers) do
+        -- Merge the blink capabilities into the individual server's config
+        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
         vim.lsp.config(name, server)
         vim.lsp.enable(name)
     end
