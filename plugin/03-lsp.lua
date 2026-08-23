@@ -110,6 +110,7 @@ do
                 -- You can add other useful clangd flags here, like:
                 "--background-index",
                 "--clang-tidy",
+                "--header-insertion=never",
             },
         },
         -- gopls = {},
