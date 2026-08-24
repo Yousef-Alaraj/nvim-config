@@ -34,7 +34,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 -- UI
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.o.cursorline = true

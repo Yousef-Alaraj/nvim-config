@@ -373,7 +373,7 @@ do
         -- Evaluating vim.fn at load time can sometimes cause path resolution issues
         -- before the editor has fully initialized its working directories.
         template_file = {
-            cpp = os.getenv("HOME") .. "/Desktop/competitive-programming/template.cpp",
+            cpp = os.getenv("HOME") .. "/competitive-programming/template.cpp",
         },
 
         compile_command = {

@@ -10,7 +10,7 @@ AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortFunctionsOnASingleLine: All
 
 # Prevents complex STL containers and bitmask operations from wrapping awkwardly
-ColumnLimit: 120
+ColumnLimit: 100
 
 # Aligns consecutive macro definitions nicely
 AlignConsecutiveMacros: true

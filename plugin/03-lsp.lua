@@ -106,11 +106,12 @@ do
     local servers = {
         clangd = {
             cmd = {
-                "clangd",
+                "/Library/Developer/CommandLineTools/usr/bin/clangd",
                 -- You can add other useful clangd flags here, like:
                 "--background-index",
                 "--clang-tidy",
                 "--header-insertion=never",
+                "--query-driver=/opt/homebrew/bin/g++*",
             },
         },
         -- gopls = {},
@@ -185,7 +186,13 @@ do
     --    :Mason
     --
     -- You can press `g?` for help in this menu.
-    local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_installed = {}
+    for name, _ in pairs(servers or {}) do
+        if name ~= "clangd" then
+            table.insert(ensure_installed, name)
+        end
+    end
+
     vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
         "stylua",
