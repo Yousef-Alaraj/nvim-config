@@ -267,7 +267,7 @@ do
 
         -- Enable treesitter based indentation
         if has_indent_query then
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
     end
 
@@ -335,7 +335,7 @@ end
 
 do
     vim.pack.add({ "https://github.com/mbbill/undotree" })
-    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
 end
 
 -- COMPETITEST
@@ -369,9 +369,6 @@ do
         received_contests_directory = ".",
         received_contests_problems_path = "$(JAVA_TASK_CLASS).$(FEXT)",
 
-        -- FIX: Replaced vim.fn.expand with the native $(HOME) modifier.
-        -- Evaluating vim.fn at load time can sometimes cause path resolution issues
-        -- before the editor has fully initialized its working directories.
         template_file = {
             cpp = os.getenv("HOME") .. "/competitive-programming/template.cpp",
         },
