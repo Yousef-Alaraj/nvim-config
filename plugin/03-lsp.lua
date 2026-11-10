@@ -195,7 +195,6 @@ do
 
     vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
-        "stylua",
         "clang-format",
     })
 
